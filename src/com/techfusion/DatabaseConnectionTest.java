@@ -6,19 +6,26 @@ import java.sql.SQLException;
 
 public class DatabaseConnectionTest {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/canteen_inventory";
-        String username = "gwagsi.rawling@ictuniversity.edu.cm"; // or your DB username
-        String password = "Nshom@ictu2022"; // or your DB password
-        
+        String url = "jdbc:mysql://localhost:3306/canteen";
+        String user = "canteen_user";  // Replace with your MySQL username
+        String password = "canteen123";  // Replace with your MySQL password
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Optional with recent JDBC versions
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connection successful!");
+            // Load MySQL JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish a connection
+            Connection connection = DriverManager.getConnection(url, user, password);
+
+            if (connection != null) {
+                System.out.println("Connected to the database!");
+            } else {
+                System.out.println("Failed to connect to the database.");
+            }
         } catch (SQLException e) {
-            System.out.println("Connection failed!");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            System.out.println("Driver not found!");
+            System.out.println("MySQL JDBC Driver not found.");
             e.printStackTrace();
         }
     }
